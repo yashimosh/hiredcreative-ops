@@ -1,0 +1,61 @@
+# Personal data (user fills these)
+# NOTE (2026-06-15): cv.md, applications.md, pipeline.md are intentionally
+# version-controlled for backup after a prior unrecoverable local data loss.
+data/scan-history.tsv
+data/job-archive.jsonl
+data/job-feed.json
+data/aggregator-stats.json
+output/*
+!output/.gitkeep
+batch/logs/*
+!batch/logs/.gitkeep
+batch/batch-state.tsv
+batch/batch-input.tsv
+batch/tracker-additions/**/*.tsv
+!batch/tracker-additions/.gitkeep
+jds/*
+!jds/.gitkeep
+
+# User config and customization (never auto-updated)
+config/profile.yml
+portals.yml
+modes/_profile.md
+.update-dismissed
+.update-lock
+
+# Secrets (never commit — use .env.example as template)
+.env
+
+# Generated
+.resolved-prompt-*
+node_modules/
+bun.lock
+
+# OS
+.DS_Store
+*.mov
+*.mp4
+
+# Claude Code local
+.claude/settings.local.json
+.claude/memory/
+hiredcreative-dashboard
+package-lock.json
+# auto-apply machine state
+data/pending-submissions.json
+data/.telegram-stop-state.json
+output/submissions/
+
+# caches (machine-local)
+data/dead-urls.txt
+data/company-cache/
+
+# company CRM (machine-local, rebuildable)
+data/companies/
+data/companies.md
+data/discovered-companies.tsv
+data/scan-rotation.log
+
+# Personal book copies (Kavita) — local only, never commit
+library/sources/
+venv/

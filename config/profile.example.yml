@@ -1,0 +1,74 @@
+# Hired Creative Ops Profile Configuration
+# Copy this file to config/profile.yml and fill in your details.
+# This is the single source of truth for your personal data across all modes.
+
+candidate:
+  full_name: "Jamie Rivera"
+  email: "jamie@example.com"
+  phone: "+1-555-0123"
+  location: "Austin, TX"
+  linkedin: "linkedin.com/in/jamierivera"
+  portfolio_url: "https://jamierivera.design"
+  github: "github.com/jamierivera"
+  twitter: "https://x.com/jamierivera"
+
+target_roles:
+  # Your North Star roles — what you're optimizing for
+  primary:
+    - "Senior Product Designer"
+    - "Design Lead"
+  # Archetypes help the evaluation system score fit
+  archetypes:
+    - name: "Product Designer"
+      level: "Senior/Lead"
+      fit: "primary"        # primary = dream role, secondary = good fit, adjacent = stretch
+    - name: "Brand Designer"
+      level: "Senior"
+      fit: "secondary"
+    - name: "Creative Director"
+      level: "Mid-Senior"
+      fit: "adjacent"
+
+narrative:
+  # Your professional headline (1 line)
+  headline: "Product designer turned design systems lead"
+  # Your exit story — what makes you unique
+  exit_story: "Scaled a 1-person design function to a 6-person team with a shared design system. Now looking for the next team to build that for."
+  # Your top 3-5 superpowers
+  superpowers:
+    - "Design systems that survive contact with a real engineering team"
+    - "Fast concept-to-prototype (idea to clickable in a day)"
+    - "Cross-functional communication with eng and PM"
+  # Proof points — projects, articles, case studies with measurable impact
+  proof_points:
+    - name: "Checkout Redesign"
+      url: "https://jamierivera.design/checkout-redesign"
+      hero_metric: "Reduced checkout drop-off 22%"
+    - name: "Design System (open source)"
+      url: "https://github.com/jamierivera/design-system"
+      hero_metric: "Adopted by 3 other teams, 500+ GitHub stars"
+  # Optional: dashboard/demo URL with credentials
+  # dashboard:
+  #   url: "https://jamierivera.design/demo"
+  #   password: "demo-2026"
+
+compensation:
+  target_range: "$140K-180K"     # Your target total comp
+  currency: "USD"
+  minimum: "$115K"               # Walk-away number
+  location_flexibility: "Remote preferred, 1 week/month on-site possible"
+
+location:
+  country: "United States"
+  city: "Austin"
+  timezone: "CST"
+  visa_status: "No sponsorship needed"
+  # For remote roles outside your country:
+  # onsite_availability: "1 week/month in any city"
+
+cv:
+  output_format: "html" # "html" (default) or "latex"
+  # (Optional) Canva resume design ID for visual CV generation via /hiredcreative-ops pdf.
+  # Find it in your Canva design URL: https://www.canva.com/design/DAxxxxxxx/...
+  # The ID starts with "D" and is 11 characters long.
+  # canva_resume_design_id: "DAxxxxxxxxx"

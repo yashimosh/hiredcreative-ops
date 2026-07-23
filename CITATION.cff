@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use hiredcreative-ops, please cite it using these metadata."
+title: "Hired Creative Ops: AI-Powered Job Search Pipeline for Creative Professionals"
+type: software
+authors:
+  - name: "yashimosh"
+    website: "https://yashimosh.com"
+url: "https://yashimosh.com"
+repository-code: "https://github.com/yashimosh/hiredcreative-ops"
+license: MIT
+keywords:
+  - ai
+  - job-search
+  - claude-code
+  - career
+  - creative
+  - design
+  - automation
+  - go-tui
+preferred-citation:
+  type: software
+  title: "career-ops: AI-Powered Job Search Pipeline"
+  authors:
+    - family-names: "Fernández de Valderrama"
+      given-names: "Santiago"
+      website: "https://santifer.io"
+  repository-code: "https://github.com/santifer/career-ops"
+  notes: "hiredcreative-ops is a fork of career-ops, retargeted at creative professionals."

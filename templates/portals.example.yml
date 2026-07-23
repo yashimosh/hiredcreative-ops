@@ -1,0 +1,296 @@
+# Portal Scanner Configuration
+# Used by /hiredcreative-ops scan to discover new offers automatically.
+#
+# Strategy (3 levels):
+#   1. Playwright → careers_url of each company (real-time, reliable)
+#   2. Greenhouse API → structured JSON (fast, Greenhouse-only)
+#   3. WebSearch with site: filters (broad discovery, may be stale)
+#
+# Plus a fourth, zero-effort level: the Hired Creative integration below queries
+# https://hiredcreative.com/api/jobs — a free aggregator of remote creative jobs
+# covering 22+ sources (Greenhouse, Ashby, Lever, Workable, Dribbble, WeWorkRemotely,
+# Welcome to the Jungle, and more). That gives you BREADTH out of the box. The
+# tracked_companies list below is for DEPTH — your specific dream companies, checked
+# directly so you never miss a posting even if an aggregator's crawl lags.
+#
+# IMPORTANT: Each company in tracked_companies MUST have careers_url.
+#   Prefer the BRANDED company careers URL whenever available; use ATS-hosted URL only as fallback.
+#   ✅ https://careers.company.com   ⚠️ https://company.wd1.myworkdayjobs.com (fallback only)
+#   Exception: ATS-hosted careers_url is acceptable when no branded careers page exists.
+#   Using raw ATS URLs when a branded page exists can cause false 410 errors (job ID mismatch).
+#
+# HOW TO CUSTOMIZE:
+#   1. Copy this file to portals.yml in the project root
+#   2. Edit title_filter.positive with YOUR target role keywords
+#   3. Add/remove companies in tracked_companies
+#   4. Adjust search_queries for your preferred job boards
+#   5. Set enabled: false on companies you don't care about
+
+# -- Hired Creative integration --
+# Queries Hired Creative (hiredcreative.com) — a free, remote-creative-jobs
+# aggregator (design, brand, motion, illustration, writing, art direction).
+# Applies the same title_filter below. Set enabled: false to skip it.
+hiredcreative:
+  enabled: true
+  url: https://hiredcreative.com/api/jobs
+
+# -- Title filter --
+# The scanner uses these keywords to decide if a title is relevant.
+# At least 1 positive must match AND 0 negatives must match (case-insensitive).
+
+title_filter:
+  positive:
+    # [CUSTOMIZE] Add keywords matching YOUR target roles
+    # -- Leadership / direction --
+    - "Creative Director"
+    - "Art Director"
+    - "Design Director"
+    - "Head of Design"
+    - "Head of Brand"
+    - "Design Lead"
+    - "Brand Lead"
+    # -- Design (product, brand, visual) --
+    - "Product Designer"
+    - "UX Designer"
+    - "UI Designer"
+    - "UX/UI"
+    - "Brand Designer"
+    - "Visual Designer"
+    - "Graphic Designer"
+    - "Digital Designer"
+    - "Design Systems"
+    # -- Motion / video --
+    - "Motion Designer"
+    - "Motion Graphics"
+    - "Animator"
+    - "Video Editor"
+    - "Video Producer"
+    # -- Content / copy --
+    - "Copywriter"
+    - "Content Designer"
+    - "Content Strategist"
+    - "UX Writer"
+    - "UX Writing"
+    # -- Illustration / 3D --
+    - "Illustrator"
+    - "3D Artist"
+    - "Concept Artist"
+    # -- Marketing-adjacent creative --
+    - "Marketing Designer"
+    - "Social Media Designer"
+    - "Brand Marketing"
+  negative:
+    # [CUSTOMIZE] Add keywords for roles you want to exclude
+    - "Junior"
+    - "Intern"
+    - "Sales Engineer"
+    - "Software Engineer"
+    - "Backend Engineer"
+    - "DevOps"
+    - "Data Scientist"
+    - "Firmware"
+    - "Blockchain"
+    - "Web3"
+    - "Crypto"
+    - "Salesforce Admin"
+    - "SAP "
+  seniority_boost:
+    # These prefixes add relevance but are not required
+    - "Senior"
+    - "Staff"
+    - "Principal"
+    - "Lead"
+    - "Head"
+    - "Director"
+
+# -- Search queries --
+# Each query triggers a WebSearch. Use site: to filter by portal.
+# The scanner extracts title, URL, and company from results.
+# [CUSTOMIZE] This is a starter set across major boards — add your own per the same pattern.
+
+search_queries:
+  # -- Ashby --
+  - name: Ashby — Creative Director / Art Director
+    query: 'site:jobs.ashbyhq.com "Creative Director" OR "Art Director" remote'
+
+  - name: Ashby — Product Designer
+    query: 'site:jobs.ashbyhq.com "Product Designer" OR "Senior Product Designer" remote'
+
+  - name: Ashby — Brand Designer
+    query: 'site:jobs.ashbyhq.com "Brand Designer" OR "Visual Designer" remote'
+
+  # -- Greenhouse --
+  - name: Greenhouse — Creative Director / Art Director
+    query: 'site:job-boards.greenhouse.io "Creative Director" OR "Art Director" remote'
+
+  - name: Greenhouse — Product/Brand Designer
+    query: 'site:job-boards.greenhouse.io "Product Designer" OR "Brand Designer" remote'
+
+  - name: Greenhouse — Motion Designer
+    query: 'site:job-boards.greenhouse.io "Motion Designer" OR "Motion Graphics" remote'
+
+  # -- Workable / Lever --
+  - name: Workable — Design roles
+    query: 'site:apply.workable.com "Creative Director" OR "Art Director" OR "Product Designer" remote'
+
+  - name: Lever — Design roles
+    query: 'site:jobs.lever.co "Creative Director" OR "Senior Product Designer" OR "Brand Designer" remote'
+
+  # -- Remote job boards --
+  - name: RemoteOK — Design
+    query: 'site:remoteok.com "Creative Director" OR "Product Designer" OR "Brand Designer"'
+
+  - name: WeWorkRemotely — Design
+    query: 'site:weworkremotely.com "Creative Director" OR "Design Lead" OR "Product Designer"'
+
+  - name: Working Nomads — Design
+    query: 'site:workingnomads.com "Creative Director" OR "Product Designer" OR "Brand Designer"'
+
+  - name: Himalayas — Design
+    query: 'site:himalayas.app "Creative Director" OR "Product Designer" OR "Brand Designer"'
+
+  # -- Creative-specific boards --
+  - name: Dribbble Jobs
+    query: 'site:dribbble.com/jobs "Creative Director" OR "Product Designer" remote'
+
+  - name: Authentic Jobs — Design
+    query: 'site:authenticjobs.com "Creative Director" OR "Art Director" OR "Product Designer"'
+
+  # -- Startup / YC --
+  - name: YC Jobs — Design
+    query: 'site:workatastartup.com "Product Designer" OR "Founding Designer" OR "Design Lead"'
+
+  # -- Community boards --
+  - name: HN Who's Hiring — Design
+    query: 'site:news.ycombinator.com "who is hiring" "Product Designer" OR "Creative Director"'
+
+  - name: Welcome to the Jungle — Design
+    query: 'site:welcometothejungle.com "Creative Director" OR "Product Designer" remote'
+
+# -- Tracked companies --
+# Companies whose career pages are checked directly, for extra depth on top of the
+# Hired Creative feed above. scan_method: playwright (default), websearch, greenhouse_api.
+# For Greenhouse companies, add api: field for faster structured JSON access — but
+# only if you've verified the token yourself; otherwise use scan_method: websearch,
+# which degrades gracefully instead of hitting a wrong/broken endpoint.
+# [CUSTOMIZE] This is a starter list of well-known, design-forward companies and
+# agencies — replace with YOUR dream companies. Verify each careers_url actually
+# resolves before relying on it.
+
+tracked_companies:
+
+  # -- Design & branding agencies / studios --
+
+  - name: IDEO
+    careers_url: https://www.ideo.com/careers
+    scan_method: websearch
+    scan_query: 'site:ideo.com/careers "Design" OR "Creative Director"'
+    notes: "Global design consultancy."
+    enabled: true
+
+  - name: Pentagram
+    careers_url: https://www.pentagram.com/about/careers
+    scan_method: websearch
+    scan_query: 'site:pentagram.com "careers" designer'
+    notes: "Independent design studio, partner-led."
+    enabled: true
+
+  - name: R/GA
+    careers_url: https://www.rga.com/careers
+    scan_method: websearch
+    scan_query: 'site:rga.com/careers "Creative Director" OR "Art Director"'
+    notes: "Global creative/innovation agency."
+    enabled: true
+
+  - name: AKQA
+    careers_url: https://www.akqa.com/careers
+    scan_method: websearch
+    scan_query: 'site:akqa.com "careers" designer'
+    notes: "Global design and innovation agency."
+    enabled: true
+
+  - name: Instrument
+    careers_url: https://www.instrument.com/careers
+    scan_method: websearch
+    scan_query: 'site:instrument.com/careers designer'
+    notes: "Portland-based digital design/brand agency."
+    enabled: true
+
+  - name: Collins
+    careers_url: https://wearecollins.com/careers
+    scan_method: websearch
+    scan_query: 'site:wearecollins.com "careers"'
+    notes: "Brand strategy and design studio."
+    enabled: true
+
+  # -- Design-forward product companies --
+
+  - name: Figma
+    careers_url: https://www.figma.com/careers
+    scan_method: websearch
+    scan_query: 'site:figma.com/careers "Product Designer" OR "Brand Designer"'
+    notes: "Design tool company — strong in-house design team."
+    enabled: true
+
+  - name: Airbnb
+    careers_url: https://careers.airbnb.com
+    scan_method: websearch
+    scan_query: 'site:careers.airbnb.com "Product Designer" OR "Brand Designer"'
+    notes: "Design-led product culture."
+    enabled: true
+
+  - name: Notion
+    careers_url: https://www.notion.so/careers
+    scan_method: websearch
+    scan_query: 'site:notion.so/careers designer'
+    notes: "Strong brand + product design team."
+    enabled: true
+
+  - name: Linear
+    careers_url: https://linear.app/careers
+    scan_method: websearch
+    scan_query: 'site:linear.app/careers designer'
+    notes: "Design-obsessed product culture, small team."
+    enabled: true
+
+  - name: Duolingo
+    careers_url: https://careers.duolingo.com
+    scan_method: websearch
+    scan_query: 'site:careers.duolingo.com "Brand" OR "Illustrator" OR "Motion"'
+    notes: "Strong illustration/brand/motion team."
+    enabled: true
+
+  - name: Canva
+    careers_url: https://www.canva.com/careers
+    scan_method: websearch
+    scan_query: 'site:canva.com/careers designer'
+    notes: "Design tool company, large in-house creative team."
+    enabled: true
+
+  - name: Webflow
+    careers_url: https://webflow.com/careers
+    scan_method: websearch
+    scan_query: 'site:webflow.com/careers "Product Designer" OR "Brand Designer"'
+    notes: "Design-forward no-code tool company."
+    enabled: true
+
+  - name: Spotify
+    careers_url: https://www.lifeatspotify.com/jobs
+    scan_method: websearch
+    scan_query: 'site:lifeatspotify.com "Design" OR "Creative"'
+    notes: "Strong design + content/brand teams."
+    enabled: true
+
+  - name: Adobe
+    careers_url: https://careers.adobe.com
+    scan_method: websearch
+    scan_query: 'site:careers.adobe.com "Product Designer" OR "Brand Designer"'
+    notes: "Large design org across many product lines."
+    enabled: true
+
+  - name: Mailchimp
+    careers_url: https://mailchimp.com/careers
+    scan_method: websearch
+    scan_query: 'site:mailchimp.com/careers designer'
+    notes: "Known for distinctive illustration-driven brand."
+    enabled: true
