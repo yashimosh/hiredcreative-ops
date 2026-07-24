@@ -1,6 +1,6 @@
 {
   "name": "hiredcreative-ops",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "AI-powered job search pipeline for creative professionals, built on Claude Code",
   "scripts": {
     "doctor": "node doctor.mjs",
