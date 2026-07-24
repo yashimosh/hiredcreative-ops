@@ -8,13 +8,19 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/yashimosh/hiredcreative-ops/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/yashimosh/hiredcreative-ops/test.yml?branch=main&label=tests" alt="Tests"></a>
+  <a href="https://github.com/yashimosh/hiredcreative-ops/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yashimosh/hiredcreative-ops" alt="License"></a>
+  <a href="https://github.com/yashimosh/hiredcreative-ops/commits/main"><img src="https://img.shields.io/github/last-commit/yashimosh/hiredcreative-ops" alt="Last commit"></a>
+  <a href="https://github.com/yashimosh/hiredcreative-ops/stargazers"><img src="https://img.shields.io/github/stars/yashimosh/hiredcreative-ops?style=flat" alt="Stars"></a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Claude_Code-000?style=flat&logo=anthropic&logoColor=white" alt="Claude Code">
   <img src="https://img.shields.io/badge/OpenCode-111827?style=flat&logo=terminal&logoColor=white" alt="OpenCode">
   <img src="https://img.shields.io/badge/Gemini_CLI-4285F4?style=flat&logo=google&logoColor=white" alt="Gemini CLI">
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white" alt="Go">
   <img src="https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white" alt="Playwright">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT">
   <br>
   <img src="https://img.shields.io/badge/EN-blue?style=flat" alt="EN">
   <img src="https://img.shields.io/badge/ES-red?style=flat" alt="ES">
