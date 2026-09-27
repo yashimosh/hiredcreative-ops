@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/yashimosh/hiredcreative-ops/compare/v1.0.0...v1.0.1) (2026-09-27)
+
+
+### Bug Fixes
+
+* batch evaluators use only the user's own OPENROUTER_API_KEY, never a local opencode config ([7033d1d](https://github.com/yashimosh/hiredcreative-ops/commit/7033d1d6ef164c5ab5477fd68a3c8b9c07f74046))
+* sync VERSION and package.json to 1.0.0 ([f64d0bb](https://github.com/yashimosh/hiredcreative-ops/commit/f64d0bb08249ce68d660cc2e5a4b754bfec755d0))
+
 ## 1.0.0 (2026-07-24)
 
 
