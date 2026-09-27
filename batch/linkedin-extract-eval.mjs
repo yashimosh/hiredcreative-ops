@@ -18,7 +18,6 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { homedir } from 'os';
 
 try {
   const { config } = await import('dotenv');
@@ -50,25 +49,10 @@ const DRY_RUN = argv.includes('--dry-run');
 // ---------------------------------------------------------------------------
 // API key resolution
 // ---------------------------------------------------------------------------
-function resolveApiKey() {
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY;
-  const p = join(homedir(), '.config', 'opencode', 'opencode.jsonc');
-  if (existsSync(p)) {
-    const raw = readFileSync(p, 'utf-8');
-    for (const candidate of [raw, raw.replace(/^\s*\/\/.*$/gm, '')]) {
-      try {
-        const cfg = JSON.parse(candidate);
-        const key = cfg?.provider?.openrouter?.options?.apiKey;
-        if (key) return key;
-      } catch { /* try next */ }
-    }
-  }
-  return null;
-}
 
-const API_KEY = resolveApiKey();
+const API_KEY = process.env.OPENROUTER_API_KEY;
 if (!API_KEY) {
-  console.error('❌ No OpenRouter API key found.');
+  console.error('❌ Set OPENROUTER_API_KEY to your own OpenRouter key.');
   process.exit(1);
 }
 

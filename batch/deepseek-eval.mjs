@@ -17,15 +17,12 @@
  *   node batch/deepseek-eval.mjs --all              # full pending backlog
  *   node batch/deepseek-eval.mjs --all --concurrency 8
  *
- * Requires: OpenRouter API key, read from (in order):
- *   1. OPENROUTER_API_KEY env var / .env
- *   2. ~/.config/opencode/opencode.jsonc → provider.openrouter.options.apiKey
+ * Requires: your own OpenRouter API key in the OPENROUTER_API_KEY env var.
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { homedir } from 'os';
 import * as cheerio from 'cheerio';
 
 try {
@@ -59,28 +56,10 @@ const DRY_RUN = argv.includes('--dry-run');
 // ---------------------------------------------------------------------------
 // API key resolution
 // ---------------------------------------------------------------------------
-function resolveApiKey() {
-  if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY;
-  const p = join(homedir(), '.config', 'opencode', 'opencode.jsonc');
-  if (existsSync(p)) {
-    const raw = readFileSync(p, 'utf-8');
-    // Try plain JSON first (most opencode.jsonc files have no real comments,
-    // and URLs containing "//" break a naive comment-stripping regex).
-    for (const candidate of [raw, raw.replace(/^\s*\/\/.*$/gm, '')]) {
-      try {
-        const cfg = JSON.parse(candidate);
-        const key = cfg?.provider?.openrouter?.options?.apiKey;
-        if (key) return key;
-      } catch { /* try next candidate */ }
-    }
-    console.error('⚠️  Could not parse opencode.jsonc as JSON.');
-  }
-  return null;
-}
 
-const API_KEY = resolveApiKey();
+const API_KEY = process.env.OPENROUTER_API_KEY;
 if (!API_KEY) {
-  console.error('❌ No OpenRouter API key found (OPENROUTER_API_KEY env, or ~/.config/opencode/opencode.jsonc).');
+  console.error('❌ Set OPENROUTER_API_KEY to your own OpenRouter key.');
   process.exit(1);
 }
 
