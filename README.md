@@ -65,6 +65,9 @@ Hired Creative Ops is agentic: Claude Code navigates career pages with Playwrigh
 | **Dashboard TUI** | Terminal UI to browse, filter, and sort your pipeline |
 | **Human-in-the-Loop** | AI evaluates and recommends, you decide and act. The system never submits an application -- you always have the final call |
 | **Pipeline Integrity** | Automated merge, dedup, status normalization, health checks |
+| **Daily Action List** | `node today.mjs`: money owed, people already in motion, live applications due a follow-up, events ahead. Zero tokens, reads plain files |
+| **Triage** | One line per URL for big backlogs (eligibility first, warm path flagged). Sorts, never discards: you pick what gets a full evaluation |
+| **Clients, Network, Events, Brand** | Beyond job boards: a lead CRM for freelance and retainer work, a network graph for warm paths, an events radar, a content pipeline |
 
 ## Quick Start
 

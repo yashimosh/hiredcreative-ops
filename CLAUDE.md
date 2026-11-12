@@ -44,6 +44,16 @@ To rollback: `node update-system.mjs rollback`
 
 AI-powered job search automation built on Claude Code: pipeline tracking, offer evaluation, CV generation, portal scanning, batch processing.
 
+### Order of work (read this before running anything)
+
+Discovery is rarely the bottleneck. In the search this fork was built on, about 160 cold applications produced no interviews, while every paid result came through a person or an event (`library/what-converts.md`). So:
+
+1. Start a session with `node today.mjs` and work it in order: money, people already in motion, live applications, events.
+2. Before any application: is the person eligible to be hired there at all? If the posting is silent, ask a human first.
+3. Before any cold form or cold message: `node precheck-duplicate.mjs "<company>"` and a look through `data/network/` for a warm path.
+4. Every submitted application gets a dated follow-up row in `data/follow-ups.md` the same session.
+5. Scans and evaluations of new cold leads come last.
+
 ### Main Files
 
 | File | Function |
@@ -68,6 +78,14 @@ AI-powered job search automation built on Claude Code: pipeline tracking, offer 
 | `interview-prep/{company}-{role}.md` | Company-specific interview intel reports |
 | `analyze-patterns.mjs` | Pattern analysis script (JSON output) |
 | `followup-cadence.mjs` | Follow-up cadence calculator (JSON output) |
+| `today.mjs` | **Daily action list across all tracks** (money, people in motion, live applications, events, parked backlog). Zero tokens. Run first, every session. |
+| `close-stale.mjs` | Closes `Applied` rows silent for 60+ days (dry run by default, `--apply` to write) |
+| `precheck-duplicate.mjs` | "Have I already dealt with this company?" Run before any CV or form. Read-only. |
+| `modes/triage.md` + `modes/_brief.md` | One-line first pass per URL for large backlogs. Sorts, never discards. |
+| `data/prospects.md`, `data/prospects/{slug}.md` | Client lead CRM (dashboard + one file per prospect). Managed by `modes/clients.md`. |
+| `data/events.md` | Events tracker. Managed by `modes/events.md`. |
+| `data/network/{slug}.md` | Network graph, one file per person. Managed by `modes/networking.md`. Check it for a warm path before any cold outreach or cold application. |
+| `data/content-pipeline.md` | Content calendar. Managed by `modes/brand.md`. |
 | `data/follow-ups.md` | Follow-up history tracker |
 | `data/companies.md`, `data/companies/` | Per-company CRM (ATS, archetypes hired, application history) — rebuildable via `scripts/build-company-crm.mjs` |
 | `scan.mjs` | Zero-token portal scanner — hits Greenhouse/Ashby/Lever APIs (and Hired Creative) directly, zero LLM cost |
@@ -265,6 +283,12 @@ Default modes are in `modes/` (English). Additional language-specific modes are 
 | Batch processes offers | `batch` |
 | Asks about rejection patterns or wants to improve targeting | `patterns` |
 | Asks about follow-ups or application cadence | `followup` |
+| Starts a session, asks "what should I do today", "what's next" | run `node today.mjs`, then work it top to bottom |
+| Has a big backlog of URLs and asks to triage, sort or pre-screen them | `triage` |
+| Asks about freelance clients, leads, proposals, retainers | `clients` |
+| Asks about conferences, fairs, meetups, open calls, who will be at an event | `events` |
+| Asks who can introduce them, warm paths, staying in touch | `networking` |
+| Asks what to post, content planning, case studies | `brand` |
 | Wants an authenticated LinkedIn feed/notifications scan | `linkedin` |
 | Wants a per-company CRM view (ATS, archetypes hired, history) | `companies` |
 | Wants to evaluate everything in the pipeline right now | `blast` |

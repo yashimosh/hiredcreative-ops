@@ -75,6 +75,10 @@ const scripts = [
   { name: 'dedup-tracker.mjs --dry-run', expectExit: 0 },
   { name: 'merge-tracker.mjs --dry-run', expectExit: 0 },
   { name: 'update-system.mjs check', expectExit: 0 },
+  { name: 'today.mjs', expectExit: 0 },
+  { name: 'today.mjs --json', expectExit: 0 },
+  { name: 'close-stale.mjs', expectExit: 0 },
+  { name: 'precheck-duplicate.mjs acme', expectExit: 0 },
 ];
 
 for (const { name, allowFail } of scripts) {
@@ -276,6 +280,7 @@ const expectedModes = [
   '_shared.md', '_profile.template.md', 'oferta.md', 'pdf.md', 'scan.md',
   'batch.md', 'apply.md', 'auto-pipeline.md', 'contacto.md', 'deep.md',
   'ofertas.md', 'pipeline.md', 'project.md', 'tracker.md', 'training.md',
+  'triage.md', '_brief.template.md', 'clients.md', 'events.md', 'networking.md', 'brand.md',
 ];
 
 for (const mode of expectedModes) {

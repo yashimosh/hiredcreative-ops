@@ -18,7 +18,7 @@ scan → pipeline → oferta → apply → tracker → followup → interview-pr
 | Step | Mode | Data | Library |
 |------|------|------|---------|
 | Find | `scan` (weekly full sweep, includes the [Hired Creative](https://hiredcreative.com) integration), `linkedin` (on-demand authed scan) | `portals.yml`, `data/scan-rotation.yml`, `data/scan-history.tsv` | `lead-generation.md` |
-| Triage | `pipeline`, `blast` (burst), `batch` | `data/pipeline.md` → `-remote` / `-relocation` / etc. | — |
+| Triage | `triage` (one line per URL, no files), `pipeline`, `blast` (burst), `batch` | `data/pipeline.md` → `-remote` / `-relocation` / etc. | — |
 | Track companies | `companies` (per-company CRM, ATS + archetypes + history) | `data/companies.md`, `data/companies/` | — |
 | Evaluate | `oferta` (A-G blocks), `ofertas` (compare), `deep` (company research) | `reports/`, tracker TSVs | `positioning.md` (fit lens) |
 | Apply | `apply`, `pdf` / `latex` (CV), `contacto` (LinkedIn contacts) | `output/{num}-{slug}/`, `data/applications.md` | `outreach.md` |
@@ -27,6 +27,45 @@ scan → pipeline → oferta → apply → tracker → followup → interview-pr
 | Close | `negotiation` (comp) | `modes/_profile.md` floors | `negotiation.md` |
 | Review automation | `review` (what has the automated pipeline done since last check) | `data/applications.md`, `reports/`, `output/` | — |
 | Full-funnel view | `analytics` (scan volume → evaluated → applied → outcomes) | `analytics.mjs` | — |
+
+## Every session starts here
+
+`node today.mjs` prints one action list from the plain files: money owed, people already in motion, live applications due a follow-up, events in the next weeks, then the parked backlog. Work it top to bottom. Why this order: `library/what-converts.md`.
+
+## Clients — find, reach, close, keep
+
+| Step | Mode | Data | Library |
+|------|------|------|---------|
+| Find and research | `clients scan`, `clients enrich {slug}` | `data/prospects.md`, `data/prospects/{slug}.md` | `lead-generation.md`, `positioning.md` |
+| Reach | `clients outreach {slug}`, `clients followup` | `data/outreach-log.md` | `outreach.md` |
+| Meet and propose | `clients prep {slug}`, `clients proposal {slug}` | prospect file | `sales-conversations.md` |
+| Close | `negotiation`, `clients won {slug}` / `clients lost {slug}` | prospect file | `negotiation.md` |
+| Keep | `clients retainer`, `clients pipeline` | `data/retainers.md` | — |
+
+## Network — the warm path
+
+| Step | Mode | Data |
+|------|------|------|
+| Map | `networking add`, `networking enrich` | `data/network/{slug}.md`, `data/network/INDEX.md` |
+| Use | `networking path`, `networking intro` | same |
+| Maintain | `networking touch`, `networking sweep`, `networking status` | same |
+
+Mandatory before any cold outreach or cold application: check for a warm path.
+
+## Events — be in the room
+
+| Step | Mode | Data |
+|------|------|------|
+| Find | `events scan`, `events add {name}` | `data/events.md` |
+| Prepare | `events prep {slug}` | prospect files + network files |
+| Follow up | `events log {slug}` | `data/outreach-log.md`, network files |
+
+## Brand — be findable
+
+| Step | Mode | Data |
+|------|------|------|
+| Plan and write | `brand plan`, `brand write`, `brand review` | `data/content-pipeline.md` |
+| Publish and learn | `brand publish`, `brand attribute`, `brand audit` | same |
 
 ## Shared infrastructure
 

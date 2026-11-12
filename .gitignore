@@ -59,3 +59,11 @@ data/scan-rotation.log
 # Personal book copies (Kavita) — local only, never commit
 library/sources/
 venv/
+
+# Other people's details and your own money: never commit these (clients, network, triage brief)
+modes/_brief.md
+data/prospects.md
+data/prospects/
+data/outreach-log.md
+data/retainers.md
+data/network/

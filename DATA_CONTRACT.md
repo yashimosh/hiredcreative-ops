@@ -23,6 +23,12 @@ These files contain your personal data, customizations, and work product. Update
 | `jds/*` | Your saved job descriptions |
 | `data/pipeline-inbound.md` | Your inbound job leads (recruiter approaches, referrals) |
 | `library/custom/*` | Your own book notes / methodology additions |
+| `modes/_brief.md` | Your compact triage brief (made from `modes/_brief.template.md`) |
+| `data/prospects.md`, `data/prospects/*` | Your client prospects (contains other people's details: keep private) |
+| `data/outreach-log.md`, `data/retainers.md` | Your outreach history and recurring revenue |
+| `data/events.md` | Your events tracker |
+| `data/network/*` | Your network graph (contains other people's details: keep private) |
+| `data/content-pipeline.md` | Your content calendar |
 
 ## System Layer (safe to auto-update)
 
@@ -55,6 +61,12 @@ These files contain system logic, scripts, templates, and instructions that impr
 | `modes/auto-submit.md` | ATS form submission instructions |
 | `modes/analytics.md` | Funnel analytics instructions |
 | `modes/review.md` | Automation activity review instructions |
+| `modes/triage.md`, `modes/_brief.template.md` | One-line first pass + its brief template |
+| `modes/clients.md` | Client lead CRM instructions |
+| `modes/events.md` | Events radar instructions |
+| `modes/networking.md` | Network graph instructions |
+| `modes/brand.md` | Content pipeline instructions |
+| `today.mjs`, `close-stale.mjs`, `precheck-duplicate.mjs` | Daily action list, stale-row closer, duplicate check |
 | `library/*.md` | Distilled methodology playbooks (NOT `library/custom/*`) |
 | `WORKFLOWS.md` | Master workflow map |
 | `modes/de/*` | German language modes |
