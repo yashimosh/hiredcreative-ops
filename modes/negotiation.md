@@ -7,7 +7,7 @@
      ============================================================ -->
 
 Used for: salary/comp negotiation on job offers, freelance/local client
-price pushback (see `local.md`), scope negotiation, and any exchange
+price pushback (see `clients.md`), scope negotiation, and any exchange
 where the user needs a reply drafted under pressure to concede.
 
 **Trigger:** user says "negotiate", "he's pushing back on price", "counter
@@ -97,9 +97,9 @@ technique):
 | Calibrated questions | "How am I supposed to do that?" / "What makes this the right price for you?" -- shifts the burden of solving the gap onto them | When you want them to reveal their real ceiling or justify their number | Overused, sounds evasive |
 | Reframe the problem, not just the price | Turn "your price is too high" into "what does this need to include for the price to make sense" | Always -- this is the scope-not-price rule from section 2 | N/A, this is the core move |
 | Strategic self-deprecation / humor to disarm | Light, specific, non-generic warmth before the firm part of the message | Good for relationship-based repeat clients (small local markets) | Careful in first-contact or high-stakes formal negotiations (comp with a new employer) -- reads as unserious |
-| Manufactured urgency | Fake scarcity or fake deadlines | **Don't.** In a small market (KRI, repeat clients) a bluffed deadline that's later exposed costs the relationship permanently | Always, unless the urgency is real (a quote validity date is fine because it's true) |
+| Manufactured urgency | Fake scarcity or fake deadlines | **Don't.** In a small market (repeat clients, everyone knows everyone) a bluffed deadline that's later exposed costs the relationship permanently | Always, unless the urgency is real (a quote validity date is fine because it's true) |
 | The "one more thing" / anchoring reveal | Letting the other side think the conversation is closing before landing the actual ask | Fine as a rhetorical device to reduce defensiveness, not to hide unfavorable terms | Don't use to bury bad news (hidden fees, scope cuts they'd object to if surfaced directly) |
-| Reading what they're not saying | Behzad-style tells: a vague in-house alternative, a colleague named as "overloaded," hedged language about timelines | Always -- this is BATNA-reading, not manipulation | N/A |
+| Reading what they're not saying | Tells such as a vague in-house alternative, a colleague named as "overloaded," hedged language about timelines | Always -- this is BATNA-reading, not manipulation | N/A |
 
 **The honesty line:** tactics that create false information (fake
 deadlines, invented competing offers, hidden terms) are off the table
@@ -160,6 +160,6 @@ Reach for these before improvising a reply:
   reply rate of any follow-up format.
 - **Silence discipline:** after you state a number, stop typing. The next
   concession belongs to whoever speaks first — never you (self-bid rule §above).
-- **Register check before sending:** KRI counterpart → warmth around a firm
+- **Register check before sending:** Relationship-first market or counterpart → warmth around a firm
   number, concede ceremony not fee; Western counterpart → shorter, direct,
   criteria-based (`library/communication.md`).

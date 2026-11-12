@@ -22,6 +22,7 @@ the core files; custom notes override core guidance on conflict.
 | `outreach.md` | First touches that get replies | `contacto` |
 | `sales-conversations.md` | Discovery calls, diagnosis, trust | interview prep |
 | `negotiation.md` | Pushback, counters, closing terms | `negotiation` mode (comp) |
+| `what-converts.md` | Order of work, from a six-month audit of a real creative search | every session start, `scan`, `pipeline`, `clients` |
 | `networking.md` | Relationships, warm intros, events | `contacto` |
 | `persuasion.md` | The psychology underneath every tactic (why, not just what) | underlies `outreach.md`, `sales-conversations.md`, `negotiation.md` |
 | `communication.md` | Register, listening, cross-cultural delivery | underlies all outbound copy + interviews |

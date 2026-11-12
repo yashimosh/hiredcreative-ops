@@ -35,6 +35,12 @@ Determine the mode from `{{mode}}`:
 | `patterns` | `patterns` |
 | `analytics` | `analytics` (complete scan→outcome funnel) |
 | `followup` | `followup` |
+| `today` | run `node today.mjs` and work its list top to bottom (money, people in motion, live applications, events) |
+| `triage` | `triage` (one line per URL, no files written; the user picks what gets a full evaluation) |
+| `clients` (any sub-command: `scan`, `enrich`, `outreach`, `proposal`, `followup`, `won`, `lost`, `prep`, `pipeline`, `retainer`) | `clients` (freelance and retainer lead CRM) |
+| `events` (any sub-command: `scan`, `add`, `prep`, `log`) | `events` |
+| `networking` (any sub-command: `status`, `add`, `enrich`, `touch`, `intro`, `path`, `sweep`) | `networking` |
+| `brand` (any sub-command: `status`, `plan`, `write`, `review`, `publish`, `attribute`, `audit`) | `brand` |
 | `review` | `review` (what did the automation do?) |
 | `blast` | `blast` (evaluate all pending pipeline URLs now) |
 | `companies` (bare, or `companies {slug}` / `companies refresh` / `companies monitor`) | `companies` (remote-jobs company CRM) |
@@ -75,6 +81,12 @@ Available commands:
   /hiredcreative-ops patterns  → Analyze rejection patterns and improve targeting
   /hiredcreative-ops analytics → Complete funnel: scan → evaluate → apply → outcome (+ archetype/channel/score)
   /hiredcreative-ops followup  → Follow-up cadence tracker: flag overdue, generate drafts
+  /hiredcreative-ops today     → Daily action list across jobs, clients, network and events (run this first)
+  /hiredcreative-ops triage    → One-line first pass over a backlog of URLs (sorts, never discards)
+  /hiredcreative-ops clients   → Freelance / retainer lead CRM (scan, outreach, proposal, followup, retainer)
+  /hiredcreative-ops events    → Events radar: find, prep, log (who will be there, who to follow up)
+  /hiredcreative-ops networking → Network graph: warm paths, intros, touches
+  /hiredcreative-ops brand     → Content and thought-leadership pipeline
   /hiredcreative-ops review    → What did the automation do? (auto-runs, applies, rejections, apply-list, health)
   /hiredcreative-ops blast     → Evaluate all pending pipeline URLs now (don't wait for nightly cron)
   /hiredcreative-ops linkedin  → Harvest LinkedIn notifications + Jobs page (on-demand, needs browser open)
@@ -101,7 +113,13 @@ Applies to: `auto-pipeline`, `oferta`, `ofertas`, `pdf`, `contacto`, `apply`, `p
 ### Standalone modes (only their mode file):
 Read `modes/{mode}.md`
 
-Applies to: `tracker`, `deep`, `training`, `project`, `patterns`, `analytics`, `followup`, `review`, `companies`
+Applies to: `tracker`, `deep`, `training`, `project`, `patterns`, `analytics`, `followup`, `review`, `companies`, `events`, `networking`, `brand`
+
+### Triage (deliberately tiny context):
+Read ONLY `modes/triage.md` + `modes/_brief.md`. Nothing else.
+
+### Clients (needs identity and positioning):
+Read `modes/_profile.md` + `config/profile.yml` + `modes/clients.md`
 
 ### Autonomous modes (read _shared.md + _profile.md + their mode file):
 Read `modes/_shared.md` + `modes/_profile.md` + `config/profile.yml` + `modes/{mode}.md`
