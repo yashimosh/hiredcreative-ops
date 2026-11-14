@@ -145,6 +145,17 @@ async function generatePDF() {
     `file://$1.$2')`
   );
 
+  // Inline the fonts as data URIs. Some browsers (Brave, recent Chrome) refuse file:// fonts
+  // from a page loaded with setContent, which silently falls back to Helvetica.
+  {
+    const { readFileSync, existsSync } = await import('fs');
+    const MIME = { woff2: 'font/woff2', woff: 'font/woff', ttf: 'font/ttf', otf: 'font/otf' };
+    html = html.replace(/url\('file:\/\/([^']+)\.(woff2?|ttf|otf)'\)/g, (m, base, ext) => {
+      const f = `${base}.${ext}`;
+      return existsSync(f) ? `url('data:${MIME[ext]};base64,${readFileSync(f).toString('base64')}')` : m;
+    });
+  }
+
   // Normalize text for ATS compatibility (issue #1)
   const normalized = normalizeTextForATS(html);
   html = normalized.html;
@@ -154,7 +165,19 @@ async function generatePDF() {
     console.log(`🧹 ATS normalization: ${totalReplacements} replacements (${breakdown})`);
   }
 
-  const browser = await chromium.launch({ headless: true });
+  // Playwright's own Chromium is sometimes missing (Mac) or unsupported (Ubuntu 26.04).
+  // Fall back to PDF_BROWSER_PATH, then to a locally installed Chromium-based browser.
+  const { existsSync } = await import('fs');
+  const fallbacks = [process.env.PDF_BROWSER_PATH, process.env.FORM_BROWSER_PATH,
+    '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].filter((p) => p && existsSync(p));
+  let browser;
+  try { browser = await chromium.launch({ headless: true }); }
+  catch (e) {
+    if (!fallbacks.length) throw e;
+    console.log(`Playwright Chromium unavailable, using ${fallbacks[0]}`);
+    browser = await chromium.launch({ headless: true, executablePath: fallbacks[0] });
+  }
   try {
     const page = await browser.newPage();
 

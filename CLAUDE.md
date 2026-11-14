@@ -81,6 +81,8 @@ Discovery is rarely the bottleneck. In the search this fork was built on, about 
 | `today.mjs` | **Daily action list across all tracks** (money, people in motion, live applications, events, parked backlog). Zero tokens. Run first, every session. |
 | `close-stale.mjs` | Closes `Applied` rows silent for 60+ days (dry run by default, `--apply` to write) |
 | `precheck-duplicate.mjs` | "Have I already dealt with this company?" Run before any CV or form. Read-only. |
+| `eligibility.mjs` | Zero-token check of pending roles against their own posting (Greenhouse, Lever, Ashby, Workable, SmartRecruiters): eligible / unknown / not eligible, with the quoted line. Rules in `config/eligibility.yml`. Writes `data/eligible-queue.md` |
+| `scripts/fill-visible.mjs` | Fills Ashby forms in a visible browser from an answers JSON and stops before Submit; screenshots in `output/submissions/` |
 | `modes/triage.md` + `modes/_brief.md` | One-line first pass per URL for large backlogs. Sorts, never discards. |
 | `data/prospects.md`, `data/prospects/{slug}.md` | Client lead CRM (dashboard + one file per prospect). Managed by `modes/clients.md`. |
 | `data/events.md` | Events tracker. Managed by `modes/events.md`. |

@@ -67,3 +67,7 @@ data/prospects/
 data/outreach-log.md
 data/retainers.md
 data/network/
+
+# eligibility.mjs output (user data)
+data/eligible-queue.json
+data/eligible-queue.md
