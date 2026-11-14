@@ -61,6 +61,7 @@ for (const line of appsText.split('\n')) {
     const sent = m ? m[1] : date;
     const age = days(sent);
     const row = { num: Number(num), company, role, score, status, sent, age, followups: followupsLogged.get(Number(num)) || 0 };
+    if (/no follow-?up/i.test(notes) && st === 'applied') continue; // decided: wait, don't chase
     if (st !== 'applied' || age <= LIVE_DAYS) live.push(row);
     else stale.push(row);
   } else if (st === 'evaluated') {
@@ -77,11 +78,25 @@ const mrr = (retText.match(/^\*\*MRR:.*$/m) || [''])[0].replace(/\*\*/g, '');
 const unpaid = [];
 for (const line of retText.split('\n')) {
   const c = cells(line);
-  if (c.length >= 5 && /^#?\d+$/.test(c[0]) && !/paid|received/i.test(c[4]) ) unpaid.push({ invoice: c[0], covers: c[1], due: c[2], amount: c[3], status: clip(c[4], 80) });
+  if (c.length < 5 || !/^#?\d+$|^[A-Z]+-\d{4}-\d{2}$/.test(c[0])) continue; // retainer rows (#3) and project rows (CLIENT-2026-11)
+  const st = c[4].replace(/\*/g, '').trim();
+  if (/^(✅\s*)?(paid|received)\b/i.test(st)) continue; // only a status that STARTS with paid counts ("paid 16 days late" in a note does not)
+  const due = (c[2].match(/\d{4}-\d{2}-\d{2}/) || [])[0];
+  const late = due ? Math.floor((Date.now() - Date.parse(due)) / 864e5) : null;
+  unpaid.push({ invoice: c[0], covers: c[1], due: due || c[2], amount: c[3], status: clip(st, 80), late });
 }
 
+// Last logged invoice period already ended → the next invoice is missing from the table.
+let lastEnd = null;
+for (const line of retText.split('\n')) {
+  const c = cells(line);
+  if (c.length >= 5 && /^#?\d+$/.test(c[0])) { const e = (c[1].match(/→\s*(\d{4}-\d{2}-\d{2})/) || [])[1]; if (e && (!lastEnd || e > lastEnd)) lastEnd = e; }
+}
+const missingInvoice = lastEnd && Date.parse(lastEnd) < Date.now() ? lastEnd : null;
+
 // ── Prospects in motion ─────────────────────────────────────────────────────
-const MOVING = /^(outreached|conversation|proposal|negotiating|won|warm|verified)/i;
+// Won = a client: its money is tracked in data/retainers.md, not here.
+const MOVING = /^(outreached|conversation|proposal|negotiating|warm|verified)/i;
 const prospects = [];
 const pdir = join(ROOT, 'data/prospects');
 if (existsSync(pdir)) {
@@ -136,7 +151,8 @@ console.log(`TODAY — ${out.date}`);
 
 h('1. Money');
 console.log(mrr || '(no MRR line in data/retainers.md)');
-if (unpaid.length) for (const u of unpaid) console.log(`  invoice ${u.invoice} · ${u.amount} · due ${u.due} · ${u.status}`);
+if (missingInvoice) console.log(`  next invoice NOT LOGGED: last period ended ${missingInvoice} (send it, then add the row to data/retainers.md)`);
+if (unpaid.length) for (const u of unpaid) console.log(`  invoice ${u.invoice} · ${u.amount} · due ${u.due}${u.late > 0 ? ` · ${u.late}d OVERDUE, unconfirmed` : ''} · ${u.status}`);
 
 h(`2. People already in motion (${prospects.length})`);
 if (!prospects.length) console.log('  none');
